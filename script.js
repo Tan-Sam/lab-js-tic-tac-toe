@@ -25,15 +25,16 @@ var winnerChar = null;
 // $('td').eq(4).data().num
 function horizontalScan(){
   var winFound = false;
-  for (var i = 0; i < 3; i++) {
-    var j = i * 3;
-    if ($('td').eq(j).text() === '') {
-      continue;
-    }
+  for (var row = 0; row < 3; row++) {
+    var column = row * 3;
 
-    var cell_1_char = $('td').eq(j).text();
-    var cell_2_char = $('td').eq(j+1).text();
-    var cell_3_char = $('td').eq(j+2).text();
+    var cell_1_char = $('td').eq(column).text();
+    var cell_2_char = $('td').eq(column+1).text();
+    var cell_3_char = $('td').eq(column+2).text();
+
+    if (cell_1_char === '') {
+      continue;   //  don't bother matching. 1st cell is empty.
+    }
 
     winFound = (cell_1_char === cell_2_char) &&
                (cell_2_char === cell_3_char);
@@ -43,30 +44,29 @@ function horizontalScan(){
        return true;
      }
   }
-
   return winFound;
 }
 
 function verticalScan() {
   var winFound = false;
   for (var i = 0; i < 3; i++) {
-    if ($('td').eq(i).text() === '') {
-      continue; // prevent matching of 3 empty ''s.
-    }
 
     var cell_1_char = $('td').eq(i).text();
     var cell_2_char = $('td').eq(i+3).text();
     var cell_3_char = $('td').eq(i+6).text();
+
+    if (cell_1_char === '') {
+      continue; // prevent matching of 3 empty ''s.
+    }
 
     winFound = (cell_1_char === cell_2_char) &&
                (cell_2_char === cell_3_char);
 
      if (winFound) {
        winnerChar = cell_1_char;
-       return true;
+       return true;   //  break for loop
      }
   }
-
   return winFound;
 }
 
@@ -77,21 +77,22 @@ const diagonalArrays = [
 
 function diagonalScan() {
   var winFound = false;
-  diagonalArrays.forEach((currVal, ind, arr)=>{
-        if ($('td').eq(currVal[0]).text() !== '') {
+  diagonalArrays.forEach((diagArrIndex)=>{
 
-          var cell_1_char = $('td').eq(currVal[0]).text();
-          var cell_2_char = $('td').eq(currVal[1]).text();
-          var cell_3_char = $('td').eq(currVal[2]).text();
+    var cell_1_char = $('td').eq(diagArrIndex[0]).text();
+    var cell_2_char = $('td').eq(diagArrIndex[1]).text();
+    var cell_3_char = $('td').eq(diagArrIndex[2]).text();
 
-          winFound = (cell_1_char === cell_2_char) &&
-                     (cell_2_char === cell_3_char);
+    if (cell_1_char !== '') { // prevent matching of 3 '' cells.
 
-          if (winFound) {
-            winnerChar = cell_1_char;
-            return false; // breakOut of forEach.
-          }
-        }
+      winFound = (cell_1_char === cell_2_char) &&
+                 (cell_2_char === cell_3_char);
+
+      if (winFound) {
+        winnerChar = cell_1_char;
+        return false; // breakOut of forEach.
+      }
+    }
   });
   return winFound;
 }
@@ -101,20 +102,22 @@ function isCellFilled(e){
 }
 
 function tickClicked(event){
-  if (isCellFilled(event)) { // ignore marked cells.
+  if (isCellFilled(event) ||  // ignore marked cells.
+      hasPlayerWon()) {       // ignore when game ends.
       return;
   }
   markCell(event);
 
-  if (threeTurnsReached()) {
-    if (hasPlayerWon()) {
-      alert('Player ' + winnerChar + " has won!");
+  setTimeout(()=>{
+    if (threeTurnsReached()) {
+      if (hasPlayerWon()) {
+        alert('Player ' + winnerChar + " has won!");
+      }
+      else if (areTurnsCompleted()) {
+        alert('Turns exhausted. Reset game.');
+      }
     }
-    else if (areTurnsCompleted()) {
-      alert('Turns exhausted. Reset game.');
-    }
-  }
-
+  }, 200);
 }
 
 const xStyle = {color:'red'};
