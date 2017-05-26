@@ -53,3 +53,11 @@ tfoot tr td{
   background: #b8bdee;
   border-color: white;
 }
+
+td[data-num] {
+  color: red;
+}
+
+/*td[textContentO'] {
+  color: gray;*/
+}

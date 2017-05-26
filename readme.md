@@ -2,39 +2,37 @@
 
 ## Introduction
 
-This week, we have been learning about writing functions, working with
-loops, and writing conditionals. We also learned about how HTML elements are styled and behave in the DOM.
-
-For this lab, you'll be building a tic tac toe game in HTML, CSS, and pure JavaScript.
-
+For this lab, you'll be building a tic tac toe game in HTML,
+                                                       CSS, and
+                                                       pure JavaScript.
 ## Exercise
-
 #### Requirements
 
-- A user should be able to click on different squares to make a move
-- Every click will alternate between marking an `X` and `O`
-- Upon marking of an individual cell, use JavaScript to add a class to
-  each cell to display separate colors
-- A cell should not be able to be replayed once marked
+- click on different squares to make a move
+- Each click alternate between marking an `X` and `O`
+- Upon marking of an individual cell, use
+  !JavaScript to add a class to each cell to display separate colors
+
+- A cell cannnot be played once marked
 - Add a reset button that will clear the contents of the board
 
 ---
 
-- Since this is our first extended lab, here are some __tips/hints__ to get started:
+__tips/hints__ :
 
- - Construct a `index.html` to be your starting point on this
- project. Add your necessary HTML tags, including `script` and
- `link` tags to link to your JavaScript and CSS, respectively.
+ - Construct a `index.html`.
+  Add HTML tags, `script` and `link` tags to link JavaScript and CSS.
 
- - Before you even start working with JavaScript, construct the
- gameboard. The gameboard page should include the 3x3 grid and at
- minimum, a reset button. Using `id` and `class` on clickable
- elements will help you wire this up in JavaScript afterwards.
+ - Construct the gameboard.
+   The gameboard page should include 3x3 grid and a reset button.
+   Using `id` and `class` on clickable elements will help wire
+   this up in JavaScript afterwards.
 
- - JavaScript portion will be next:
-
-   * Locate the element first to use it within your app. Think about
-      using `document.getElementById`, `document.getElementsByClassName` or something similar to locate your target elements. Try this in your console to make sure your selection works.
+ - JavaScript portion:
+   * Locate the element first to use. Think about
+      using `document.getElementById`,
+            `document.getElementsByClassName` or something similar
+    to locate your target elements. Try this in your console to make sure your selection works.
 
    * After finding the elements, start writing logic to listen for
       `click` events on those elements
