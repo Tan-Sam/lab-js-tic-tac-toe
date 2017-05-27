@@ -54,10 +54,7 @@ tfoot tr td{
   border-color: white;
 }
 
-td[data-num] {
+/*not working*/
+/*td[data-num] {
   color: red;
-}
-
-/*td[textContentO'] {
-  color: gray;*/
-}
+}*/
